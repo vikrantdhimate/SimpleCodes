@@ -1,0 +1,50 @@
+package com.vikrant;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
+public class DateHandler {
+
+                public static void main(String[] args) {
+                                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a", Locale.ENGLISH);
+                                formatter.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+                                Date date1 = null, date2 = null;
+                                String dateInString1 = "55-01-2015 10:15:55 PM";  // incase if you give "55-01-2015 10:15:55 PM" it adds up days and shows Feb 25
+                                try {
+                                                date1 = formatter.parse(dateInString1);
+                                                String formattedDateString1 = formatter.format(date1);
+                                } catch (ParseException e) { // this will validate and fail if date doesnt fit to formatter... confirm for 12/24 hour
+                                                System.out.println(e);
+
+                                }
+                                System.out.println(date1);
+
+                                String dateInString2 = "22-01-2015 10:15:55 AM";
+                                try {
+                                                date2 = formatter.parse(dateInString2);
+                                                String formattedDateString2 = formatter.format(date2);
+                                } catch (ParseException e) {
+                                                System.out.println(e);
+                                }
+                                System.out.println(date2);
+
+                                validateDates(date1, date2);
+
+                }
+
+                public static void validateDates(Date date1, Date date2) {
+                                //throw exception accordingly
+                                if (date1.compareTo(date2) > 0) {
+                                                System.out.println("Date1 is after Date2");
+                                } else if (date1.compareTo(date2) < 0) {
+                                                System.out.println("Date1 is before Date2");
+                                } else if (date1.compareTo(date2) == 0) {
+                                                System.out.println("Date1 is equal to Date2");
+                                } else {
+                                                System.out.println("How to get here?");
+                                }
+                }
+}
